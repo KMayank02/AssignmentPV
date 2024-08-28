@@ -389,6 +389,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  smooth_page_indicator:
+    dependency: "direct main"
+    description:
+      path: "smooth_page_indicator-1.2.0+3"
+      relative: true
+    source: path
+    version: "1.2.0+3"
   source_span:
     dependency: transitive
     description:
