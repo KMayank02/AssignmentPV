@@ -18,7 +18,7 @@ class ReplyFeed extends StatefulWidget {
 
 class _ReplyFeedState extends State<ReplyFeed> {
   // int vis = 1;
-  PageController pageController = PageController();
+  PageController pageController = PageController(initialPage: 0);
   void initState() {
     Future.delayed(Duration.zero, () {
       final replyProvider = Provider.of<ReplyProvider>(context, listen: false);
@@ -37,6 +37,7 @@ class _ReplyFeedState extends State<ReplyFeed> {
         return Stack(
           children: [
             PageView.builder(
+              physics: vids.length==1?NeverScrollableScrollPhysics():AlwaysScrollableScrollPhysics(),
               controller: pageController,
               itemCount: vids.length,
               scrollDirection: Axis.horizontal,
@@ -202,19 +203,22 @@ class _ReplyFeedState extends State<ReplyFeed> {
               // ),
             ),
             Positioned(
-              right: 0,
-              top: SizeConfig.screenHeight * 0.3,
+              right: vids.length == 3
+                  ? -18
+                  : vids.length == 1
+                      ? 18
+                      : 0,
+              top: 240,
               child: SmoothPageIndicator(
                 controller: pageController,
                 count: vids.length,
                 effect: ScrollingDotsEffect(
-                  maxVisibleDots: 3,
-                  fixedCenter: true,
-                  dotHeight: 10,
-                  dotWidth: 10,
-                  activeDotColor: Colors.white,
-                  dotColor: Colors.grey
-                ),
+                    maxVisibleDots: 3,
+                    fixedCenter: true,
+                    dotHeight: 10,
+                    dotWidth: 10,
+                    activeDotColor: Colors.white,
+                    dotColor: Colors.grey),
               ),
             ),
           ],
